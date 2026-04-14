@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
@@ -7,9 +9,23 @@ from app.api import users, convert, history, learn, review
 
 load_dotenv()
 
-Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="English With Me API")
+async def _init_db():
+    if engine is None:
+        return
+    try:
+        await asyncio.to_thread(Base.metadata.create_all, engine)
+    except Exception as e:
+        print(f"[DB] create_all failed: {e}", flush=True)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    asyncio.create_task(_init_db())
+    yield
+
+
+app = FastAPI(title="English With Me API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

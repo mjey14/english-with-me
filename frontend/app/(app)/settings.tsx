@@ -93,7 +93,7 @@ export default function SettingsScreen() {
 
           {/* Modes */}
           <Text style={s.sectionLabel}>Active Modes</Text>
-          <Text style={s.hint}>Choose which modes appear in your menu.</Text>
+          <Text style={s.hint}>Choose which categories appear in your menu.</Text>
           <View style={s.modeList}>
             {PRESETS.map((preset) => {
               const active = enabledModes.includes(preset.id);

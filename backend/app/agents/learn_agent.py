@@ -5,8 +5,6 @@ import json
 
 load_dotenv()
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
-
 CONTEXT_META = {
     "work": {
         "meeting":      "in-person work meetings with colleagues or a manager",
@@ -82,6 +80,7 @@ Rules:
         HumanMessage(content=f"Generate 3 useful expressions for: {context_description}"),
     ]
 
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
     response = llm.invoke(messages)
     content = response.content.strip()
 

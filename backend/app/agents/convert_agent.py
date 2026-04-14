@@ -5,8 +5,6 @@ import json
 
 load_dotenv()
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0.3)
-
 # mode: "speaking" | "texting" | "writing"
 SUB_CATEGORY_META = {
     "work": {
@@ -126,6 +124,7 @@ Rules:
         HumanMessage(content=user_message),
     ]
 
+    llm = ChatOpenAI(model="gpt-4o", temperature=0.3)
     response = llm.invoke(messages)
     content = response.content.strip()
 

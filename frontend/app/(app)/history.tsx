@@ -98,7 +98,7 @@ export default function HistoryScreen() {
   };
 
   const confirmDelete = (id: string) => {
-    Alert.alert("Delete", "Remove this entry from history?", [
+    Alert.alert("Delete", "Remove this from history? This can't be undone.", [
       { text: "Cancel", style: "cancel" },
       { text: "Delete", style: "destructive", onPress: () => handleDelete(id) },
     ]);
@@ -220,7 +220,7 @@ export default function HistoryScreen() {
             {query ? "No results found." : "Nothing here yet."}
           </Text>
           <Text style={[s.emptyHint, { color: c.textSecondary }]}>
-            {query ? "Try a different search term." : "Your conversions will appear here."}
+            {query ? "Try a different search term." : "Your conversions and learned expressions will appear here."}
           </Text>
         </View>
       ) : (

@@ -220,7 +220,7 @@ export default function ReviewScreen() {
               style={[s.actionBtn, { backgroundColor: c.surface, borderColor: c.border }]}
               onPress={() => advance(false)}
             >
-              <Text style={[s.actionText, { color: c.textPrimary }]}>See again</Text>
+              <Text style={[s.actionText, { color: c.textPrimary }]}>Practice more</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[s.actionBtn, { backgroundColor: c.buttonBg }]}
