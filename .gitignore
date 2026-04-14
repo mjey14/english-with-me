@@ -8,3 +8,14 @@ node_modules/
 dist/
 build/
 .expo/
+
+# Personal notes & internal files
+MEMORY_BANK.md
+LEARNING_LOG_EN.md
+.impeccable.md
+.taskmaster/
+
+# Design exploration
+category-colors.html
+font-preview.html
+unregistered-colors.html
