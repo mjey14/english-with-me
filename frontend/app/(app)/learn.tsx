@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Animated,
+  Keyboard,
 } from "react-native";
 
 import { useRef } from "react";
@@ -17,6 +18,7 @@ import ScreenLayout from "@/components/ScreenLayout";
 import ExpressionCard from "@/components/ExpressionCard";
 import { Colors, getChipStyle, getPaletteStyle, getPresetStyle } from "@/constants/colors";
 import { useAppTheme } from "@/contexts/ThemeContext";
+import { useUser } from "@/contexts/UserContext";
 import { PRESETS, DEFAULT_ENABLED } from "@/constants/presets";
 import { api } from "@/services/api";
 
@@ -28,10 +30,10 @@ interface Expression {
 
 export default function LearnScreen() {
   const { scheme } = useAppTheme();
+  const { enabledModes } = useUser();
   const c = Colors[scheme];
   const s = useMemo(() => makeStyles(c), [scheme]);
 
-  const [enabledModes, setEnabledModes] = useState<string[]>(DEFAULT_ENABLED);
   const [selectedCategory, setSelectedCategory] = useState("work");
   const [selectedSub, setSelectedSub] = useState<string | null>("meeting");
   const [expressions, setExpressions] = useState<Expression[]>([]);
@@ -45,18 +47,14 @@ export default function LearnScreen() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    api.getProfile().then((data) => {
-      const modes: string[] = data.enabled_modes ?? DEFAULT_ENABLED;
-      setEnabledModes(modes);
-      if (!modes.includes(selectedCategory)) {
-        const first = PRESETS.find((p) => modes.includes(p.id));
-        if (first) {
-          setSelectedCategory(first.id);
-          setSelectedSub(first.subCategories[0]?.key ?? null);
-        }
+    if (!enabledModes.includes(selectedCategory)) {
+      const first = PRESETS.find((p) => enabledModes.includes(p.id));
+      if (first) {
+        setSelectedCategory(first.id);
+        setSelectedSub(first.subCategories[0]?.key ?? null);
       }
-    });
-  }, []);
+    }
+  }, [enabledModes]);
 
   const enabledPresets = PRESETS.filter((p) => enabledModes.includes(p.id));
   const activePreset = enabledPresets.find((p) => p.id === selectedCategory);
@@ -73,6 +71,7 @@ export default function LearnScreen() {
   };
 
   const handleGenerate = useCallback(async () => {
+    Keyboard.dismiss();
     setLoading(true);
     setError(null);
     setExpressions([]);

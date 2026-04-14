@@ -16,9 +16,11 @@ import { useAppTheme } from "@/contexts/ThemeContext";
 import type { AppScheme } from "@/constants/colors";
 import { PRESETS, DEFAULT_ENABLED } from "@/constants/presets";
 import { api } from "@/services/api";
+import { useUser } from "@/contexts/UserContext";
 
 export default function SettingsScreen() {
   const { scheme, setScheme } = useAppTheme();
+  const { setEnabledModes: setContextModes } = useUser();
   const c = Colors[scheme];
 
   const [description, setDescription] = useState("");
@@ -61,6 +63,7 @@ export default function SettingsScreen() {
       ]);
       setSavedDescription(description);
       setSavedModes(enabledModes);
+      setContextModes(enabledModes);
       setStatus("saved");
     } catch {
       setStatus("error");

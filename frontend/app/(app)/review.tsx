@@ -11,7 +11,7 @@ import {
 import { useRef } from "react";
 
 import ScreenLayout from "@/components/ScreenLayout";
-import { Colors, getPaletteStyle, getPresetStyle } from "@/constants/colors";
+import { Colors, getPaletteStyle, getPresetStyle, getChipStyle } from "@/constants/colors";
 import { useAppTheme } from "@/contexts/ThemeContext";
 import { PRESETS } from "@/constants/presets";
 import { api } from "@/services/api";
@@ -71,7 +71,8 @@ export default function ReviewScreen() {
         }
         return [item];
       });
-      setItems(flattened);
+      const shuffled = [...flattened].sort(() => Math.random() - 0.5);
+      setItems(shuffled);
       setIndex(0);
       setRevealed(false);
       setDone(flattened.length === 0);
@@ -172,10 +173,15 @@ export default function ReviewScreen() {
         {/* Card */}
         <Animated.View style={[s.card, { transform: [{ translateY: slideAnim }] }]}>
           {/* Category + source badges */}
-          <View style={{ flexDirection: "row", gap: 6 }}>
+          <View style={{ flexDirection: "row", gap: 6, flexWrap: "wrap" }}>
             <View style={[s.badge, { backgroundColor: catStyle.bg }]}>
               <Text style={[s.badgeText, { color: catStyle.text }]}>{catLabel}</Text>
             </View>
+            {subLabel ? (
+              <View style={[s.badge, { backgroundColor: getChipStyle(current.sub_category!, scheme).bg }]}>
+                <Text style={[s.badgeText, { color: getChipStyle(current.sub_category!, scheme).text }]}>{subLabel}</Text>
+              </View>
+            ) : null}
             {isLearn && (
               <View style={[s.badge, { backgroundColor: getPaletteStyle(2, scheme).bg }]}>
                 <Text style={[s.badgeText, { color: getPaletteStyle(2, scheme).text }]}>Learn</Text>

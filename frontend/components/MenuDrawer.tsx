@@ -12,8 +12,8 @@ import { useRef, useEffect, useState } from "react";
 import { useRouter, usePathname } from "expo-router";
 import { Colors, getPresetStyle } from "@/constants/colors";
 import { useAppTheme } from "@/contexts/ThemeContext";
-import { PRESETS, DEFAULT_ENABLED } from "@/constants/presets";
-import { api } from "@/services/api";
+import { PRESETS } from "@/constants/presets";
+import { useUser } from "@/contexts/UserContext";
 
 const STUDY_ITEMS = [
   { label: "Browse expressions", route: "/(app)/learn" },
@@ -36,14 +36,7 @@ export default function MenuDrawer({ visible, onClose }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const slideAnim = useRef(new Animated.Value(-280)).current;
-  const [enabledModes, setEnabledModes] = useState<string[]>(DEFAULT_ENABLED);
-
-  useEffect(() => {
-    if (!visible) return;
-    api.getProfile().then((data) => {
-      if (data.enabled_modes) setEnabledModes(data.enabled_modes);
-    }).catch(() => {});
-  }, [visible]);
+  const { enabledModes } = useUser();
 
   useEffect(() => {
     Animated.timing(slideAnim, {
