@@ -1,0 +1,147 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": "1",
+        "title": "Setup Project Environment",
+        "description": "Initialize the project environment using Expo, FastAPI, and PostgreSQL.",
+        "details": "1. Initialize a new Expo project for React Native.\n2. Set up FastAPI backend with a basic structure.\n3. Configure PostgreSQL database and connect it to FastAPI.\n4. Ensure all components can communicate effectively.",
+        "testStrategy": "Verify that the frontend can connect to the backend and the backend can perform basic CRUD operations on the database.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [],
+        "updatedAt": "2026-04-13T13:47:21.085Z"
+      },
+      {
+        "id": "2",
+        "title": "Implement User Profile Management",
+        "description": "Create a user profile management system to store and edit the English role model description.",
+        "details": "1. Define the 'users' table in PostgreSQL as per the data model.\n2. Implement API endpoints in FastAPI to retrieve and update the role model description.\n3. Develop React Native components for viewing and editing the role model description in the Settings screen.",
+        "testStrategy": "Test API endpoints with unit tests to ensure data is correctly stored and retrieved. Verify UI updates correctly when the role model description is changed.",
+        "priority": "medium",
+        "dependencies": [
+          "1"
+        ],
+        "status": "in-progress",
+        "subtasks": [],
+        "updatedAt": "2026-04-13T13:55:22.735Z"
+      },
+      {
+        "id": "3",
+        "title": "Develop Convert Mode UI",
+        "description": "Create the UI for the Convert Mode feature, allowing users to input Korean text and select categories.",
+        "details": "1. Design and implement the main Convert screen using React Native.\n2. Include input fields for Korean text and dropdowns for category and sub-category selection.\n3. Ensure the UI adheres to the design principles outlined in the PRD.",
+        "testStrategy": "Perform UI tests to ensure all elements are present and functional. Validate that user inputs are correctly captured.",
+        "priority": "high",
+        "dependencies": [
+          "1"
+        ],
+        "status": "in-progress",
+        "subtasks": [],
+        "updatedAt": "2026-04-13T14:32:04.989Z"
+      },
+      {
+        "id": "4",
+        "title": "Implement Conversion Logic",
+        "description": "Develop the backend logic to convert Korean text to English using the Claude API, applying the user's role model style.",
+        "details": "1. Create a FastAPI endpoint to handle conversion requests.\n2. Integrate the Claude API for text conversion.\n3. Apply the user's role model style to the conversion output.\n4. Return multiple English expression options with labels and explanations.",
+        "testStrategy": "Write integration tests to verify that the conversion logic returns correctly styled outputs. Mock the Claude API for consistent test results.",
+        "priority": "high",
+        "dependencies": [
+          "2",
+          "3"
+        ],
+        "status": "in-progress",
+        "subtasks": [],
+        "updatedAt": "2026-04-13T14:32:07.005Z"
+      },
+      {
+        "id": "5",
+        "title": "Build Conversion Log Feature",
+        "description": "Implement automatic logging of each conversion to the database and provide a history view.",
+        "details": "1. Extend the 'conversions' table in PostgreSQL to store conversion logs.\n2. Implement FastAPI endpoints to log conversions and retrieve history.\n3. Develop a History screen in React Native to display past conversions.",
+        "testStrategy": "Test that each conversion is logged correctly and that the history can be retrieved and displayed accurately.",
+        "priority": "medium",
+        "dependencies": [
+          "4"
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": "6",
+        "title": "Implement Copy and Edit Functionality",
+        "description": "Enable users to copy and lightly edit conversion outputs before using them.",
+        "details": "1. Add copy-to-clipboard functionality for conversion outputs in the Convert Mode UI.\n2. Allow inline editing of selected outputs before copying.",
+        "testStrategy": "Verify that users can copy outputs to the clipboard and make edits without errors. Ensure edited text is correctly copied.",
+        "priority": "medium",
+        "dependencies": [
+          "4"
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": "7",
+        "title": "Design and Implement Navigation",
+        "description": "Set up navigation between the main screens: Convert, History, and Settings.",
+        "details": "1. Use React Navigation to implement a tab-based navigation system.\n2. Ensure smooth transitions between Convert, History, and Settings screens.",
+        "testStrategy": "Test navigation paths to ensure all screens are accessible and transitions are smooth.",
+        "priority": "medium",
+        "dependencies": [
+          "3",
+          "5"
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": "8",
+        "title": "Integrate AI Feedback for Conversion Outputs",
+        "description": "Provide feedback on conversion outputs based on the user's role model profile.",
+        "details": "1. Analyze conversion outputs to ensure they align with the user's role model profile.\n2. Provide feedback or suggestions for improvement if necessary.",
+        "testStrategy": "Manually verify that feedback is relevant and aligns with the role model description. Automate tests for common scenarios.",
+        "priority": "low",
+        "dependencies": [
+          "4"
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": "9",
+        "title": "Setup Distribution for iOS and Mac",
+        "description": "Prepare the app for distribution via TestFlight for iOS and direct build for Mac.",
+        "details": "1. Configure Expo for iOS builds and set up TestFlight distribution.\n2. Prepare a direct build process for Mac distribution.",
+        "testStrategy": "Test the build process for both iOS and Mac to ensure the app installs and runs correctly on target devices.",
+        "priority": "low",
+        "dependencies": [
+          "7"
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": "10",
+        "title": "Define and Document UI Design Principles",
+        "description": "Finalize the UI design principles and color palette in the `.impeccable.md` file.",
+        "details": "1. Collaborate with designers to finalize the color palette and design principles.\n2. Document these in the `.impeccable.md` file for reference during development.",
+        "testStrategy": "Review the document to ensure it aligns with the product's design goals and principles.",
+        "priority": "low",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "version": "1.0.0",
+      "lastModified": "2026-04-13T14:32:07.005Z",
+      "taskCount": 10,
+      "completedCount": 1,
+      "tags": [
+        "master"
+      ]
+    }
+  }
+}
