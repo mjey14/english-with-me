@@ -1,4 +1,4 @@
-const BASE_URL = "http://172.20.10.3:8000";
+const BASE_URL = "https://backend-production-fc70.up.railway.app";
 
 export const api = {
   getProfile: async () => {
